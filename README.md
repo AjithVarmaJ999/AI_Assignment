@@ -12,7 +12,7 @@ This program uses Dijkstra's algorithm to find the shortest path between two cit
 
 The required dataset is:
 
-`indian-cities-dataset.csv`
+`indian-cities-dataset.csv` open source dataset
 
 The program asks the user to enter the starting city and destination city and then displays the shortest path and total distance.
 
