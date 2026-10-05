@@ -1,5 +1,4 @@
 import matplotlib.pyplot as plt
-import time
 
 size = 70
 
@@ -10,6 +9,7 @@ for i in range(size):
     for j in range(size):
         row.append(0)
     grid.append(row)
+
 
 for i in range(10, 30):
     for j in range(15, 20):
@@ -30,6 +30,7 @@ for i in range(45, 60):
 start = (0, 0)
 goal = (35, 40)
 
+
 def heuristic(a, b):
 
     distance = abs(a[0] - b[0]) + abs(a[1] - b[1])
@@ -38,6 +39,7 @@ def heuristic(a, b):
 
 
 # A* algorithm
+
 def a_star(grid, start, goal):
 
     open_list = []
@@ -54,6 +56,7 @@ def a_star(grid, start, goal):
 
     visited = []
 
+
     while len(open_list) > 0:
 
         current = open_list[0]
@@ -61,6 +64,7 @@ def a_star(grid, start, goal):
         for cell in open_list:
 
             if f_score[cell] < f_score[current]:
+
                 current = cell
 
         if current == goal:
@@ -75,6 +79,7 @@ def a_star(grid, start, goal):
 
                 path.append(current)
 
+
             path.reverse()
 
             return path, len(visited)
@@ -83,7 +88,6 @@ def a_star(grid, start, goal):
 
         visited.append(current)
 
-
         moves = [
             (-1, 0),
             (1, 0),
@@ -91,9 +95,11 @@ def a_star(grid, start, goal):
             (0, 1)
         ]
 
+
         for move in moves:
 
             new_row = current[0] + move[0]
+
             new_col = current[1] + move[1]
 
             if new_row >= 0 and new_row < size:
@@ -104,8 +110,8 @@ def a_star(grid, start, goal):
 
                         neighbor = (new_row, new_col)
 
-
                         new_g_score = g_score[current] + 1
+
 
                         if neighbor not in g_score:
 
@@ -119,7 +125,7 @@ def a_star(grid, start, goal):
                             )
 
                             open_list.append(neighbor)
-
+                    
                         else:
 
                             if new_g_score < g_score[neighbor]:
@@ -135,13 +141,8 @@ def a_star(grid, start, goal):
 
     return None, len(visited)
 
-start_time = time.time()
 
 path, explored_count = a_star(grid, start, goal)
-
-end_time = time.time()
-
-computation_time = end_time - start_time
 
 if path is None:
 
@@ -155,23 +156,27 @@ else:
 
     print("Cells explored:", explored_count)
 
-    print("Computation time:", computation_time, "seconds")
-
-
 plt.figure(figsize=(8, 8))
 
-plt.imshow(grid, cmap="Greys", origin="upper")
-
+plt.imshow(
+    grid,
+    cmap="Greys",
+    origin="upper"
+)
 
 if path is not None:
 
     path_rows = []
+
     path_columns = []
+
 
     for cell in path:
 
         path_rows.append(cell[0])
+
         path_columns.append(cell[1])
+
 
     plt.plot(
         path_columns,
@@ -188,6 +193,8 @@ plt.scatter(
     s=100,
     label="Start"
 )
+
+
 
 plt.scatter(
     goal[1],
@@ -208,3 +215,4 @@ plt.legend()
 plt.grid()
 
 plt.show()
+
